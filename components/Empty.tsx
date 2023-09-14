@@ -18,7 +18,7 @@ export const Empty = ({
                     src = "/logo-color.png"
                 />
             </div>
-            <p>{label}</p>
+            <p className="text-muted-foreground text-sm text-center">{label}</p>
         </div>
 
 
