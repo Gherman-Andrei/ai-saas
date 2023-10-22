@@ -6,6 +6,7 @@ import {usePathname} from "next/navigation";
 
 import {cn } from "@/lib/utils";
 import { CodeIcon, ImageIcon, LayoutDashboard, MessageSquare, Settings, VideoIcon, MusicIcon} from "lucide-react";
+import { FreeCounter } from "@/components/free-counter";
 const montserrtat = Montserrat({weight: "600",subsets: ["latin"]});
 
 const routes = [
@@ -59,7 +60,15 @@ const routes = [
     },
 
 ];
-const Sidebar = () => {
+
+interface SidebarProps {
+   apiLimitCount: number; 
+};
+
+
+
+const Sidebar = ({apiLimitCount=0}:SidebarProps) => {
+    
     const pathName = usePathname();
     return(
 
@@ -75,7 +84,7 @@ const Sidebar = () => {
                 </div>
                 <h1 className={cn ("text-2xl font-bold",montserrtat.className)}>Panda</h1>
             </Link>
-                <div className = "space-y-1">
+                <div className = "space-y-2">
                 {routes.map((routes) =>(
                     <Link 
                     href={routes.href}
@@ -92,7 +101,11 @@ const Sidebar = () => {
                 
                 </div>
             </div>
+            <FreeCounter
+                apiLimitCount = {apiLimitCount}
+            />
         </div>
+        
 
     );
 
