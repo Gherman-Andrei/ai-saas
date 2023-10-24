@@ -4,19 +4,19 @@ import Link from "next/link";
 
 
 
-const LandingPage = () => {
+const LandingPage = async () => {
     return (
         <div> Landing Page (Unprotected) 
             <div>
              <Link href="/Login">
-            <Button>
+            <Button variant="premium">
                Login
             </Button>
             </Link>
         </div>
         <div>
              <Link href="/Register">
-            <Button>
+            <Button variant = "premium">
                Register
             </Button>
             </Link>

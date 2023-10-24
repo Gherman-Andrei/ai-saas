@@ -6,7 +6,13 @@ import { Button } from "./ui/button";
 import {Sheet, SheetTrigger , SheetContent} from "./ui/sheet";
 import { useState,useEffect } from "react";
 
-const MobileSidebar =( ) =>{
+interface MobileSidebarProps{
+    apiLimitCount:number;
+}
+
+const MobileSidebar =( {
+    apiLimitCount 
+}:MobileSidebarProps) =>{
     const [isMonted , setisMonted] = useState(false);
     useEffect(() =>{
       setisMonted(true);  
@@ -17,12 +23,12 @@ const MobileSidebar =( ) =>{
     return (
     <Sheet>
         <SheetTrigger>
-            <Button variant ="ghost" size = "icon" className="md:hidden" asChild>
+            <Button variant ="ghost" size = "icon" className="md:hidden">
                 <Menu /> 
             </Button>
         </SheetTrigger>
         <SheetContent side="left" className="p-0" >
-            <Sidebar />
+            <Sidebar apiLimitCount={apiLimitCount} />
         </SheetContent>
     </Sheet>
     );
