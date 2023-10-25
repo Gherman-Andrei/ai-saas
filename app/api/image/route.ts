@@ -3,6 +3,7 @@ import { NextResponse } from "next/server";
 import OpenAI  from "openai";
 import Configuration from "openai";
 import { increaseApiLimit , checkAPiLimit} from "@/lib/api-limit";
+import { checkSubscription } from "@/lib/subscription";
 //import Image from "openai"
 //const configuration1 = new Configuration({
 //    organization : "org-BnyiaRER7PlCCkCKN5xtsjNz",
@@ -48,10 +49,10 @@ export async function POST(
                 });
                 
             }
-            const freeTrial = await checkAPiLimit();
+            const isPro = await checkSubscription();
 
-            if(!freeTrial) {
-                return new NextResponse ("Free trial has expired.",{status:403});
+            if(!isPro) {
+                return new NextResponse ("Upgrade to Panda Pro.",{status:403});
             }
             const response = await openai.images.generate({
                 prompt: prompt,
