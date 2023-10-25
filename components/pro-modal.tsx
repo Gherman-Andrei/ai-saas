@@ -7,6 +7,8 @@ import { Check, Code, Image, MessageSquare, Music, Video, Zap } from "lucide-rea
 import { Card } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 import { Button } from "./ui/button";
+import axios from "axios";
+import { useState } from "react";
 
 
 
@@ -47,6 +49,21 @@ const tools = [
 
 export const ProModal = () =>{
     const proModal = useProModal();
+    const[loading,setLoading] = useState(false);
+    const onSubscribe = async () =>{
+        try{
+            setLoading(true);
+            const respone = await axios.get("/api/stripe");
+            window.location.href = (await respone).data.url;
+
+        }catch(error){
+            console.log(error,"STRIPE CLIENT ERROR");
+        }finally{
+            setLoading(false);
+        }
+
+
+    }
 
 
     return (
@@ -84,6 +101,7 @@ export const ProModal = () =>{
                 </DialogHeader>
                 <DialogFooter>
                     <Button
+                    onClick = {onSubscribe}
                     size = "lg"
                     variant="premium"
                     className="w-full"
