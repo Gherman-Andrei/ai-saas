@@ -1,27 +1,14 @@
-import {Button} from "@/components/ui/button";
-import Link from "next/link";
+import {LandingNavbar} from "@/components/landing-navbar";
+import {LandingHero}   from "@/components/landing-hero";
+import { LandingComponent } from "@/components/landing-comp";
 
-
-
-
-const LandingPage = async () => {
+const LandingPage = () => {
     return (
-        <div> Landing Page (Unprotected) 
-            <div>
-             <Link href="/Login">
-            <Button variant="premium">
-               Login
-            </Button>
-            </Link>
-        </div>
-        <div>
-             <Link href="/Register">
-            <Button variant = "premium">
-               Register
-            </Button>
-            </Link>
-        </div>
-        </div>
+       <div className="h-full">
+            <LandingNavbar/>
+            <LandingHero/>
+            <LandingComponent />
+       </div>
        
     );
 }
