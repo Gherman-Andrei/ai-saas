@@ -9,6 +9,7 @@ import { cn } from "@/lib/utils";
 import { Button } from "./ui/button";
 import axios from "axios";
 import { useState } from "react";
+import toast from "react-hot-toast";
 
 
 
@@ -57,7 +58,7 @@ export const ProModal = () =>{
             window.location.href = (await respone).data.url;
 
         }catch(error){
-            console.log(error,"STRIPE CLIENT ERROR");
+            toast.error("Something went wrong");
         }finally{
             setLoading(false);
         }

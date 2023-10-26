@@ -14,10 +14,12 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { Empty } from "@/components/Empty";
 import { Loader } from "@/components/loader";
+import toast from "react-hot-toast";
+import { useProModal } from "@/hooks/use-pro-model";
 
 
 const MusicPage = ()=> {
-
+    const proModal = useProModal();
     const router = useRouter();
 
     const[music, setMusic] = useState<string>();
@@ -37,8 +39,12 @@ const MusicPage = ()=> {
         
         setMusic(response.data.audio);
         form.reset();
-        } catch(error){
-            console.log(error);
+        }catch(error:any) {
+            if(error?.response?.status === 403){
+                proModal.onOpen();
+            }else{
+                toast.error("Something went wrong");
+            }
         } finally {
             router.refresh();
         }
